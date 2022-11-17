@@ -1,0 +1,27 @@
+const express = require('express')
+const app = express()
+
+app.get('/', (req, res) => {
+    res.send(`
+        <p>98 Bottles of beer on the wall</p>
+        <a href="http://localhost:3000/98">take one down, pass it around</a>`)
+});
+
+app.get('/:number_of_bottles', (req, res) => {
+    const newNum = req.params.number_of_bottles - 1
+    if (req.params.number_of_bottles == 0){
+        res.send(`
+            <a href="http://localhost:3000">Came to black out again?</a>
+        `)
+    } else {
+        res.send(`
+    <p>${newNum} bottles of beer on the wall</p>
+    <a href="http://localhost:3000/${newNum}">Take one down, pass it around</a>
+    
+    `)
+    }
+    
+})
+
+
+app.listen(3000)
